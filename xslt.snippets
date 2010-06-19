@@ -1,0 +1,248 @@
+#
+# Top-Level
+#
+snippet textstylesheet
+	<?xml version="1.0" encoding="UTF-8"?>
+	<xsl:stylesheet
+		version="1.0"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output 
+		method="text"
+		indent="yes"
+	/>
+	
+	${1}
+	
+	</xsl:stylesheet>
+
+snippet htmlstylesheet
+	<?xml version="1.0" encoding="UTF-8"?>
+	<xsl:stylesheet
+		version="1.0"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		exclude-result-prefixes="html" >
+	<xsl:output
+		method="xml"
+		doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+		doctype-public="-//W3C//DTD XHTML 1.1//${1:language}"
+	/>
+	
+	${2}
+	
+	</xsl:stylesheet>
+
+snippet stylesheet
+	<?xml version="1.0" encoding="UTF-8"?>
+	<xsl:stylesheet 
+		version="1.0"
+		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output
+	   method="xml"
+	   indent="yes"
+	   encoding="UTF-8"
+	/>
+	
+	${1}
+	
+	</xsl:stylesheet>
+
+snippet alias
+	<xsl:namespace-alias 
+		stylesheet-prefix="${1:to_replace}" 
+		result-prefix="${2:new_prefix}"/>
+snippet import
+	<xsl:import href=""/>
+snippet include
+	<xsl:include href=""/>
+snippet key
+	<xsl:key name="${1}" match="${2}" use="${3:node_part_to_use}"/>
+snippet strip
+	<xsl:strip-space elements="${1}"/>
+
+
+#
+# Templates
+#
+snippet templ
+	<xsl:template match="${1}">
+		${2}
+	</xsl:template>
+snippet namtempl
+	<xsl:template name="${1}" match="${2}">
+		${3}
+	</xsl:template>
+snippet apply
+	<xsl:apply-templates select="${1}"/>
+snippet call
+	<xsl:call-template name="${1:templatename}">
+		${2:params}
+	</xsl:call-template>
+snippet param
+	<xsl:param name="${1:paramname}"/>
+snippet wparam
+	<xsl:with-param name="${1:paramname}">${2:paramvalue}</xsl:with-param>
+snippet fallback
+	<xsl:fallback>
+		${1}
+	</xsl:fallback>
+	
+
+#
+# Values
+#
+snippet el
+	<xsl:element name="${1:nodename}">
+		${2}
+	</xsl:element>
+snippet attr
+	<xsl:attribute name="${1}">${2}</xsl:attribute>
+snippet val
+	<xsl:value-of select="${1}"/>
+snippet copy
+	<xsl:copy-of select="${1}"/>
+snippet txt
+	<xsl:text>
+		${1:text}
+	</xsl:text>
+snippet var
+	<xsl:variable name="${1:name}" select="${2:value}"/>
+
+#
+# Program flow
+#
+snippet if
+	<xsl:if test="${1}">
+		${2}
+	</xsl:if>
+snippet choose
+	<xsl:choose>
+		<xsl:when test="${1}">${2}</xsl:when>
+		<xsl:otherwise>${3}</xsl:otherwise>
+	</xsl:choose>
+snippet for
+	<xsl:for-each select="${1}">
+		${2}
+	</xsl:for-each>
+snippet sort
+	<xsl:sort select="${1}" order="${2:ascending}"/>
+snippet sortnum
+	<xsl:sort 
+		select="${1}" 
+		data-type="number" 
+		order="${2:ascending}"/>
+snippet sorttext
+	<xsl:sort 
+		select="${1}" 
+		data-type="text" 
+		case-order="${2:upper-first}" 
+		order="${3:ascending}"/>
+
+#
+# Other
+#
+snippet message
+	<xsl:message terminate="${1:yes_or_no}">
+		${2}
+	</xsl:message>
+snippet //
+	<xsl:comment>
+		${1:text}
+	</xsl:comment>
+
+#
+# XPath Axes
+#
+snippet child
+	child::${1:tagname}
+snippet parent
+	parent::${1:tagname}
+snippet desc
+	descendant::${1:tagname}
+snippet anc
+	ancestor::${1:tagname}
+snippet follsib
+	following-sibling::${1:tagname}
+snippet precsib
+	preceding-sibling::${1:tagname}
+snippet foll
+	following::${1:tagname}
+snippet prec
+	preceding::${1:tagname}
+snippet at
+	attribute::${1:tagname}
+snippet ns
+	namespace::${1:tagname}
+snippet self
+	self::${1:tagname}
+snippet descself
+	descendant-or-self::${1:tagname}
+snippet ancself
+	ancestor-or-self::${1:tagname}
+
+#
+# XPath Functions
+#
+snippet text
+	text()
+snippet node
+	node()
+snippet count
+	count(${1:nodeset})
+snippet last
+	last()
+snippet local
+	local-name(${1:nodeset})
+snippet name
+	name(${1:nodeset})
+snippet nsuri
+	namespace-uri(${1:nodeset})
+snippet pos
+	position()
+
+# String Functions
+snippet cat
+	concat(${1:strings})
+snippet contains
+	contains(${1:container}, ${2:searchstring})
+snippet normspace
+	normalize-space(${1:string})
+snippet starts
+	starts-with(${1:container}, ${2:searchstring})
+snippet str
+	string(${1:object})
+snippet len
+	string-length(${1:string})
+snippet substr1
+	substring(${1:string}, ${2:pos})
+snippet substr2
+	substring(${1:string}, ${2:pos}, ${3:len})
+snippet after
+	substring-after(${1:string}, ${2:afterstring})
+snippet before
+	substring-before(${1:string}, ${2:beforestring})
+snippet replace
+	translate(${1:string}, ${2:to_replace}, ${3:replacements})
+
+# Bool functions
+snippet bool
+	boolean(${1:object})
+snippet false
+	false()
+snippet true
+	true()
+snippet lang
+	lang(${1:string})
+snippet not
+	not(${1:expr})
+snippet ceil
+	ceiling(${1:number})
+snippet floor
+	floor(${1:number})
+snippet num
+	number(${1:arg})
+snippet round
+	round(${1:number})
+snippet sum
+	sum(${1:nodeset})
